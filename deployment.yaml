@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  labels:
+    app: my-app  # On crée un label app pour le Deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pod-app  # Le ReplicaSet recherche le pod template dont le label app vaut pod-app grâce au selector
+  template:
+    metadata:
+      labels:
+        app: pod-app  # Label app pour le pod template
+    spec:
+      containers:
+      - name: pod-app
+        image: vnarvaezt/streamlit:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "256m"
+          limits:
+            memory: "256Mi"
+            cpu: "512m"

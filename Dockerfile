@@ -1,4 +1,6 @@
 FROM python:3.12-slim
+# install curl
+RUN apt-get update && apt-get install -y curl
 RUN pip install --upgrade pip
 RUN mkdir /app
 COPY requirements.txt /app/
